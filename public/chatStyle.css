@@ -1,0 +1,129 @@
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100vh;
+}
+
+.chatbox {
+    /* height: 100vh; */
+    width: calc(100vw - 200px);
+    min-width: 380px;
+    display: flex;
+    flex-flow: column;
+    background: #eee;
+}
+
+#messagelist {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.private {
+    background: rgb(46, 117, 157);
+    color: white;
+    width: 300px;
+    align-self: flex-end;
+    margin: 10px 40px 10px 10px;
+}
+
+.notPrivate {
+    background: rgb(95, 95, 95);
+    color: white;
+    width: 300px;
+    align-self: flex-start;
+    margin: 10px 10px 10px 40px;
+}
+
+#messagelist .private p:first-child {
+    color: rgb(92, 206, 255);
+}
+  
+#messagelist .notPrivate p:first-child {
+    color: rgb(205, 205, 205);
+}
+
+#messagelist > li {
+    list-style-type: none;
+    padding: 5px;
+    border-radius: 1em;
+    padding-left: 15px;
+} 
+
+
+  
+/* active users */
+.activeUsersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    gap: 3em;
+    color: white;
+    padding: 20px;
+}
+.activeUsersContainer > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    align-items: center;
+    height: 80vh;
+}
+#users {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    list-style: none;
+    color: black;
+}
+  
+#users > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    border-radius: 1em;
+    height: 30px;
+    background: white;
+    text-align: center;
+}
+/*  */
+
+.messageForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+}
+.messageForm > input {
+    width: calc(100% - 75px);
+    height: 40px;
+    padding: 10px;
+    margin-left: 15px;
+    outline: none;
+    border-radius: 1em;
+    border: 2px solid rgb(255, 255, 255);
+    -webkit-transition: 0.35s;
+    transition: 0.35s;
+}
+
+.messageForm > input:focus {
+    border: 2px solid rgb(46, 117, 157);
+}
+
+.sendTextBtn {
+    display: flex;
+    justify-content: center;
+    width: 75px;
+    height: 40px;
+    border: none;
+    margin-right: 10px;
+}
+
+.svgSendBtn {
+    cursor: pointer;
+    text-align: center; 
+    fill: rgb(0, 155, 222);
+}
+
