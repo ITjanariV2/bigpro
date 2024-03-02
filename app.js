@@ -92,8 +92,7 @@ const verifyCall = async (email, password, done) => {
                     password: res[0].password,
                     verified: res[0].verified
                 }
-                let username = user.name
-                module.exports.username = username // export username for socket.io
+                module.exports.user = user // export user variable for socket.io
                 // kui salas6nad on v6rdsed, muidu 2ra lase sisse logida
                 if (await bcrypt.compare(password, user.password) && user.verified == 1) {
                         return done(null, user)

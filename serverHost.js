@@ -8,7 +8,7 @@ const express = require('express')
 const path = require('path')
 const mysql = require('mysql')
 
-const userNameReq = require('./app')
+const userInfo = require('./app')
 
 const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -27,53 +27,21 @@ const server = http.createServer(app)
 
 const io = socketio(server, {
     cors: {
-        origin: '*',
-        methods: ['GET', 'POST']
+        origin: ['http://192.168.1.109:5000']
     }
 })
 
-const users = []
+// let values = [messageObj.message, messageObj.email, messageObj.timestamp]
+// connection.query('INSERT INTO chatrooms (message, email, timestamp) VALUES (?, ?, ?)', values, (err, data) => {
+//   if (err) { console.log(err) }
+//   console.log('Message inserted')
+// })
 
-io.on("connection", socket => {
-    // listens for events from client
-    socket.on("adduser", () => {
-      socket.user = userNameReq.username
-      users.push(userNameReq.username)
-      io.sockets.emit("users", users) // sends events and data to client
-    
-      io.to(socket.id).emit("private", { // sends an event to all clients in a specific room
-        id: socket.id,
-        name: socket.user,
-        msg: "secret message"
-      })
-    })
-  
-    socket.on("message", message => {
-        let messageObj = {
-            message, // message (from user)
-            sender: socket.id, // id of the user
-            timestamp: Date.now()
-        }
-
-        console.log(messageObj)
-        
-      io.sockets.emit("message", {
-        message,
-        user: socket.user,
-        id: socket.id
-      })
-    })
-  
-    socket.on("disconnect", () => {
-      console.log(`user ${socket.user} is disconnected`)
-      if (socket.user) {
-        users.splice(users.indexOf(socket.user), 1)
-        io.sockets.emit("user", users)
-        console.log("remaining users:", users)
-      }
-    })
+io.on("connection", (socket) => {
+  socket.on('message', data => {
+    socket.broadcast.emit('sendMessage', data)
+  })
 })
+   
   
 server.listen(port, () => console.log('Server running on port: ' + port))
-
-// console.log(server)
