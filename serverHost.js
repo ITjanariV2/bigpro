@@ -27,7 +27,7 @@ const server = http.createServer(app)
 
 const io = socketio(server, {
     cors: {
-        origin: ['http://192.168.1.109:5000']
+        origin: ['']
     }
 })
 
